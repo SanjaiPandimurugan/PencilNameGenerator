@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -46,14 +46,17 @@ button:hover {
     width: 100%;
     height: auto;
 }
+
 .textOverlay {
     position: absolute;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    color: #333;
+    font-family: 'Arial Black';
+    font-weight: 900;
+    color: #000;
     transform-origin: center left;
     white-space: nowrap;
+    text-shadow: 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
 }
+
 #downloadLink {
     display: none;
     text-align: center;

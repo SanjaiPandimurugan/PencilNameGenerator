@@ -13,19 +13,18 @@ function generateImage() {
         return;
     }
 
-    // Clear previous text overlays
     outputContainer.querySelectorAll('.textOverlay').forEach(el => el.remove());
 
-    const pencilsPerSet = 10;
+    const PerSet = 10;
     const sets = 2;
-    const fontSize = 15; // Adjust as needed
-    const pencilWidth = 3.6; // Width of each pencil (in %)
-    const setSpacing = 13; // Spacing between sets (in %)
-    const withinSetSpacing = 0; // Small spacing within sets (in %)
+    const fontSize = 15; 
+    const pencilWidth = 3.6; 
+    const setspace = 13; 
+    const withinspace = 0;
 
     for (let set = 0; set < sets; set++) {
-        for (let pencil = 0; pencil < pencilsPerSet; pencil++) {
-            const x = 10 + (set * (pencilsPerSet * (pencilWidth + withinSetSpacing) + setSpacing)) + (pencil * (pencilWidth + withinSetSpacing));
+        for (let pencil = 0; pencil < PerSet; pencil++) {
+            const x = 10 + (set * (PerSet * (pencilWidth +  withinspace) + setspace)) + (pencil * (pencilWidth + withinspace));
             const y = 25; // Adjust vertical position (in %)
 
             const textElement = document.createElement('div');
