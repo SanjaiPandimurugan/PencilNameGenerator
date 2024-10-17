@@ -60,7 +60,54 @@ button:hover {
 #downloadLink {
     display: none;
     text-align: center;
-    margin-top: 10px;
-    color: #4CAF50;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
     text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#downloadLink:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#downloadLink:active {
+    transform: scale(0.98);
+}
+.coordinates {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.coordinates input {
+    width: calc(50% - 5px);
+}
+
+.coordinates {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.coordinate-control {
+    display: flex;
+    align-items: center;
+}
+
+.coordinate-control label {
+    margin-right: 5px;
+}
+
+
+.coordinate-control button {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0 5px;
 }

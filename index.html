@@ -10,12 +10,27 @@
     <div class="container">
         <h1>PencilNameGenerator</h1>
         <input type="text" id="nameInput" maxlength="16" placeholder="Enter name (max 16 characters)">
+        <div class="coordinates">
+            <div class="coordinate-control">
+                <label for="xCoordinate">X:</label>
+                <button class="decrement" data-target="xCoordinate">-</button>
+                <input type="number" id="xCoordinate" value="10" step="0.1">
+                <button class="increment" data-target="xCoordinate">+</button>
+            </div>
+            <div class="coordinate-control">
+                <label for="yCoordinate">Y:</label>
+                <button class="decrement" data-target="yCoordinate">-</button>
+                <input type="number" id="yCoordinate" value="25" step="0.1">
+                <button class="increment" data-target="yCoordinate">+</button>
+            </div>
+        </div>
         <button id="generateBtn">Generate Image</button>
         <div id="outputContainer">
             <img id="outputImage" src="Pencil laser engraving A4 template v1 (2).png" alt="Pencil template">
         </div>
         <a id="downloadLink" download="pencil.png">Download Image</a>
     </div>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
