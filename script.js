@@ -5,8 +5,12 @@ const generateBtn = document.getElementById('generateBtn');
 const outputContainer = document.getElementById('outputContainer');
 const outputImage = document.getElementById('outputImage');
 const downloadLink = document.getElementById('downloadLink');
+const downloadTextLink = document.getElementById('downloadTextLink');
 
-generateBtn.addEventListener('click', generateImage);
+generateBtn.addEventListener('click', () => {
+    generateImage();
+    updateDownloadLinks();
+});
 
 // Add event listeners for increment and decrement buttons
 document.querySelectorAll('.increment, .decrement').forEach(button => {
@@ -19,6 +23,7 @@ document.querySelectorAll('.increment, .decrement').forEach(button => {
             target.value = (parseFloat(target.value) - step).toFixed(1);
         }
         generateImage();
+        updateDownloadLinks();
     });
 });
 
@@ -56,15 +61,54 @@ function generateImage() {
             outputContainer.appendChild(textElement);
         }
     }
-
-    // Generate the image for download
-    html2canvas(outputContainer).then(canvas => {
-        const dataURL = canvas.toDataURL('image/png');
-        downloadLink.href = dataURL;
-        downloadLink.style.display = 'block';
-    });
 }
 
+function generateTextOnlyImage() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas size to match the original image
+    canvas.width = outputImage.naturalWidth;
+    canvas.height = outputImage.naturalHeight;
+    
+    // Set background to transparent
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw text overlays
+    outputContainer.querySelectorAll('.textOverlay').forEach(textElement => {
+        const rect = textElement.getBoundingClientRect();
+        const containerRect = outputContainer.getBoundingClientRect();
+        
+        ctx.save();
+        ctx.translate(rect.left - containerRect.left, rect.top - containerRect.top);
+        ctx.rotate(-Math.PI / 2); // Rotate 270 degrees
+        
+        ctx.font = window.getComputedStyle(textElement).font;
+        ctx.fillStyle = window.getComputedStyle(textElement).color;
+        ctx.textBaseline = 'top';
+        ctx.fillText(textElement.textContent, 0, 0);
+        
+        ctx.restore();
+    });
+    
+    return canvas.toDataURL('image/png');
+}
+
+function updateDownloadLinks() {
+    html2canvas(outputContainer).then(canvas => {
+        downloadLink.href = canvas.toDataURL('image/png');
+        downloadLink.style.display = 'inline-block';
+    });
+    
+    downloadTextLink.href = generateTextOnlyImage();
+    downloadTextLink.style.display = 'inline-block';
+}
+
+
 downloadLink.addEventListener('click', () => {
-    console.log('Image downloaded');
+    console.log('Image with background downloaded');
+});
+
+downloadTextLink.addEventListener('click', () => {
+    console.log('Text-only image downloaded');
 });

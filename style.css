@@ -57,26 +57,51 @@ button:hover {
     text-shadow: 0.5px 0.5px 0px rgba(255, 255, 255, 0.5);
 }
 
-#downloadLink {
-    display: none;
+#downloadLink, #downloadTextLink {
+    display: inline-block;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
-    background-color: #4CAF50;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s, transform 0.1s;
+    width: calc(50% - 5px);
+    box-sizing: border-box;
+}
+
+#downloadLink {
+    background-color: #4CAF50; /* Green */
+    margin-right: 5px;
 }
 
 #downloadLink:hover {
     background-color: #45a049;
+}
+
+#downloadTextLink {
+    background-color: #3498db; /* Blue */
+    margin-left: 5px;
+}
+
+#downloadTextLink:hover {
+    background-color: #2980b9;
+}
+
+#downloadLink:hover, #downloadTextLink:hover {
     transform: scale(1.05);
 }
 
-#downloadLink:active {
+#downloadLink:active, #downloadTextLink:active {
     transform: scale(0.98);
+}
+
+/* Container for download buttons */
+.download-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 .coordinates {
     display: flex;
