@@ -71,20 +71,29 @@ function generateTextOnlyImage() {
     canvas.width = outputImage.naturalWidth;
     canvas.height = outputImage.naturalHeight;
     
-    // Set background to transparent
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Set background to white
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     // Draw text overlays
     outputContainer.querySelectorAll('.textOverlay').forEach(textElement => {
         const rect = textElement.getBoundingClientRect();
         const containerRect = outputContainer.getBoundingClientRect();
         
+        const scaleX = canvas.width / containerRect.width;
+        const scaleY = canvas.height / containerRect.height;
+        
+        const x = (rect.left - containerRect.left) * scaleX;
+        const y = (rect.top - containerRect.top) * scaleY;
+        
         ctx.save();
-        ctx.translate(rect.left - containerRect.left, rect.top - containerRect.top);
+        ctx.translate(x, y);
         ctx.rotate(-Math.PI / 2); // Rotate 270 degrees
         
-        ctx.font = window.getComputedStyle(textElement).font;
-        ctx.fillStyle = window.getComputedStyle(textElement).color;
+        const computedStyle = window.getComputedStyle(textElement);
+        const fontSize = parseFloat(computedStyle.fontSize) * scaleY;
+        ctx.font = `${fontSize}px ${computedStyle.fontFamily}`;
+        ctx.fillStyle = computedStyle.color;
         ctx.textBaseline = 'top';
         ctx.fillText(textElement.textContent, 0, 0);
         
